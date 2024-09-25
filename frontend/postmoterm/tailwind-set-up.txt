@@ -1,0 +1,21 @@
+>>----START-----<<
+PROBLEM: tailwind set up
+DISCOVERY: when loading react app styling wasn't showing
+DEBUG: coraborated setup with tailwind docs
+FIX: 
+> npm install -D tailwindcss postcss autoprefixer
+> npx tailwindcss init //to create config file
+> edited config file to look like this
+
+	/** @type {import('tailwindcss').Config} */
+	module.exports = {
+	  content: [
+	    "./src/**/*.{js,jsx,ts,tsx}",
+	  ],
+	  theme: {
+	    extend: {},
+	  },
+	  plugins: [],
+	}
+>>----END----<<
+

@@ -1,0 +1,29 @@
+download btn 
+	> tenant report
+	> landlord report
+	> all data on all houses and all rooms as excel sheets
+surbordinate
+	> create surbodinate
+	> edit surbodinate
+	> delete surbodinate
+	> view a list of surbodinates with relevant permissions
+houses
+	> create house
+	> edit house
+	> delete house
+	> view house {in table}
+rooms
+	> create room
+	> edit room
+	> delete room
+	> view room {in table}
+tenant
+	> create tenant
+	> edit tenant
+	> kick tenant
+	> view tenant details
+payments
+	> log payments
+	> update payments
+	> delete payments
+	> view payments
