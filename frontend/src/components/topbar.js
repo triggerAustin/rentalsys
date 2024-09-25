@@ -1,26 +1,27 @@
 import { React, useState, useEffect } from 'react';
+import { IoIosSearch, IoMdDownload } from "react-icons/io";
 import Item from './item.js';
+import Icon from './icon.js';
 
 export default function Topbar(props){
-	const titles = ['log payment', 'tenant report', 'lanlord report'];
-	const items = [];
-	let i;
-	for(i = 0; i < titles.length; i++){
-		items.push(<Item title={titles[i]} hvs="hover:scale-105" hbc="hover:underline"/>);
-	}
-	const [showSearchBar, setShowSearchBar] = useState('false')
-	const showSearch = () => {
-		setShowSearchBar(!showSearchBar);
-	}
   return(
 	<>
+	  {/* this is the topbar element*/}
 	  <div className="flex flex-row justify-between items-center 
-	  			pr-2 lg:h-16 w-full bg-gray-200 pb-2">
-	  	<p>Company logo</p>
-		<div className='divide-gray-300 flex flex-row gap-6 justify-center items-end pb-2'>
-	  		{ items }
+	  			pr-2 lg:h-16 w-full pb-2 border-b">
+	  	{/* this is the search element */}
+	  	<input placeholder="search houses/units/tenants here..." 
+	  		className="focus:outline-none w-90 focus:border-b-2 ml-6"/>
+	  		{/*this is the search icon */}
+	  	<div className="absolute top-5 left-0 flex items-center 
+	  			subpixel-antialiased pointer-events-none font-bold text-xl">
+			<IoIosSearch />
+  		</div>
+	  		{/*icons*/}
+	  	<div className='flex flex-row gap-4 w-1/2 justify-end'>
+	  		<Icon icon={IoMdDownload} title="reports" h='hover:shadow-sm' hbg='hover:bg-gray-200'/>
+	  		<Icon icon={IoMdDownload} title="Invoice"h='hover:shadow-sm' hbg='hover:bg-gray-200'/>
 	  	</div>
-	  	{showSearchBar && (<input placeholder="search"/>)}
 	  </div>
 	</>
   )
