@@ -9,7 +9,7 @@ import { FaClipboardList } from "react-icons/fa";
 //components
 import Item from './item.js';
 
-export default function Navbar({ setTitle, isCollapsed, setIsCollapsed }){
+export default function Navbar({ setTitle, isCollapsed, setIsCollapsed, setTitle2, setTitle3, setShowRoomsData, setShowRooms, setHouseName, setShowReport, setShowInvoice }){
 	let index2 = 100;
 	let index3 = 101;
 	let title2 = 'profile';
@@ -18,22 +18,30 @@ export default function Navbar({ setTitle, isCollapsed, setIsCollapsed }){
 	const [activeIndex, setActiveIndex] = useState(0); // State to track active item
   	const handleItemClick = (index, title) => {
     		setActiveIndex(index); // Set the active item index
-		setTitle(title); //set title in titlebar to item name
+			let Title = title +"> "
+		setTitle(Title); //set title in titlebar to item name
+		setTitle2("")
+		setTitle3("")
+		setShowRooms(false)
+		setShowRoomsData(false)
+		setHouseName("")
+		setShowInvoice(false)
+		setShowReport(false)
   	};
 	//to resize navbar
 	const resizeNav = () => {setIsCollapsed(prevState => !prevState);}
 	
 	//titles for navbar items
-	const items = ['Overview', 'Houses',  'Payment Logs', 
-			'Billing', 'Surbodinates', 'Actions']
+	const items = ['Overview', 'Houses',  'Entry Logs', 
+			'Billings', 'Surbodinates', 'Actions']
 	const icons = [MdGridView, MdBusiness, MdAnalytics, TbCashRegister, MdGroup, BsClipboardPlusFill]
   return(
 	<div className={`${isCollapsed ? 'lg:w-16' : 'lg:w-40'} h-screen shadow-md fixed flex gap-2 
-	  		 flex-col fixed transition-all duration-300`}>
+	  		 flex-col fixed transition-all duration-300 z-10`}>
 	  <div className="lg:w-full flex flex-row justify-between items-center px-2"
 	  		style={{ height: "4rem" }}>
 	  	<p className={`${isCollapsed ? "hidden" : "block"}`}>company logo</p>
-	  	<GiHamburgerMenu className="text-2xl hover:pointer" onClick={() => resizeNav()}/>
+	  	<GiHamburgerMenu className="text-2xl cursor-pointer" onClick={() => resizeNav()}/>
 	  </div>
 	  <h6 className="text-sm font-semibold flex flex-shrink ml-2 text-gray-400">MAIN MENU</h6>
 	  	{/*create the links on navbar*/}
