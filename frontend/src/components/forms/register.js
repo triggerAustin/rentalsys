@@ -10,7 +10,7 @@ const RegistrationForm = ({ onSubmit }) => {
     ];
   
     return (
-      <ReusableForm title="Registration Form" fields={fields} onSubmit={onSubmit} />
+      <ReusableForm fields={fields} onSubmit={onSubmit} />
     );
   };
 

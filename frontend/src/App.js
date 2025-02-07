@@ -14,6 +14,7 @@ import Billings from './components/billings.js';
 import PaymentLogs from './components/paymentLogs.js';
 import PrintableInvoiceTable from './components/downloads/invoice.js';
 import PrintableReportsTable from './components/downloads/report.js';
+import HomePage from './components/homePage.js';
 
 
 
@@ -33,8 +34,11 @@ function App() {
 
 
   console.log(title)
+  const isLogedIn = true
   return (
-    <div className="App flex flex-row font-serif">
+    <>
+    {!isLogedIn && <HomePage />}
+    {isLogedIn && <div className="App flex flex-row font-serif">
 	  <Navbar setTitle={setTitle} setTitle2={setTitle2} setTitle3={setTitle3} setHouseName={setHouseName}  setShowInvoice={setShowInvoice} setShowReport={setShowReport}
     isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} setShowRoomsData={setShowRoomsData} setShowRooms={setShowRooms}/>
 	  <main className='grid grid-row-1 fixed right-0 transition-all duration-300' 
@@ -59,7 +63,9 @@ function App() {
         {showInvoice && <PrintableInvoiceTable  />}
       </>
 	  </main>
-    </div>
+    </div>}
+    </>
+  
   );
 }
 

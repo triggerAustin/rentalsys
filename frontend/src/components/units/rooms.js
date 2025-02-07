@@ -1,5 +1,6 @@
 import React from 'react';
 import ReusableTable from './table';
+import HouseCard from "./houseCard";
 
 export default function Rooms(props){  
   //props.HseName
@@ -90,9 +91,24 @@ export default function Rooms(props){
     props.setShowRoomsData(true)
     props.setRoomNumber(hse)
   }
+  const houseDetails = {
+    houseName: "Springfield House",
+    address: "123 Main St, Springfield",
+    landlordTel: "0797466307",
+    paymentRate: 1200,
+    landlordId: "1232423432",
+    lrNumber: "923402-"
+  };
 
+  const handleHouseDetailsEdit = () => {
+    alert("Edit House Clicked");
+  };
   return (
-    <div className="p-4"><ReusableTable 
+    <div className="p-4 max-h-[90vh] overflow-y-auto">
+    
+    <HouseCard houseDetails={houseDetails} onEdit={handleHouseDetailsEdit} />
+          
+    <ReusableTable 
     columns={columns} 
     data={tableData} 
     selectedYear={2023} 

@@ -7,7 +7,7 @@ const LoginForm = ({ onSubmit }) => {
   ];
 
   return (
-    <ReusableForm title="Login Form" fields={fields} onSubmit={onSubmit} />
+    <ReusableForm fields={fields} onSubmit={onSubmit} />
   );
 };
 

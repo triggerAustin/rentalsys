@@ -34,7 +34,7 @@ const ReusableTable = ({
   return (
     <div>
       {/* Year Selector (Dropdown) */}
-      <div className="flex justify-center mb-4">
+      <div className="flex justify-end mb-4">
         <select 
           value={currentYear} 
           onChange={handleYearChange} 

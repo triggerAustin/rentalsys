@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import GraphComponent from "../charts/graphComponent";
 import ReusableButton from "../button";
 import ReusableTable from "./table";
+import RoomCard from "./roomCard";
 
 
 export default function roomsData(){
@@ -130,6 +131,23 @@ export default function roomsData(){
     }
   };
   
+  const [roomDetails] = useState({
+    roomNumber: '101',
+    unitType: 'Apartment',
+    paymentRate: '$500/month',
+  });
+
+  const [tenantDetails] = useState({
+    name: 'John Doe',
+    tenantId: 'TNT123',
+    phone: '123-456-7890',
+    currMeterReading: '1200',
+  });
+
+  const handleRoomDetailsEdit = () => {
+    // Edit room action
+    alert('Edit Room Clicked');
+  };
   
   const toggleDisplayBtn = () => setToggleDisplay(!toggleDisplay);
 
@@ -138,9 +156,14 @@ export default function roomsData(){
       <ReusableButton text={toggleDisplay ? "Graph" : "Table"} onClick={toggleDisplayBtn} variant="primary" rooms={false} />
 
 
-
       {toggleDisplay ? (
-        
+  <>  
+    <div className="max-h-[90vh] overflow-y-auto">
+      <RoomCard 
+        roomDetails={roomDetails} 
+        tenantDetails={tenantDetails} 
+        onEdit={handleRoomDetailsEdit} 
+      />
       <ReusableTable 
         columns={columns} 
         data={tableData} 
@@ -149,10 +172,11 @@ export default function roomsData(){
         onDeleteClick={handleDelete} 
         hover={true} 
       />
-
-      ) : (
-        <GraphComponent title="Room Data" data={data} />
-      )}
+    </div>
+  </>
+) : (
+  <GraphComponent title="Room Data" data={data} />
+)}
     </div>
   );
 };
