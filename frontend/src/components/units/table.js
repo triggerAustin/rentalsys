@@ -65,28 +65,38 @@ const ReusableTable = ({
 
           {/* Table Body */}
           <tbody>
-            {Object.keys(tableData).map((house, rowIndex) => (
-              <tr 
-                key={rowIndex} 
-                className={`border ${hover ? "hover:bg-gray-100 cursor-pointer" : ""}`}
-                onClick={(e) => {
-                  // Ensure the onRowClick doesn't fire when clicking the button column
-                  if (e.target.closest(".action-buttons")) return;
-                  if (onRowClick) onRowClick(house);
-                }}
-              >
-                <td className="p-3 border">{house}</td>
-                <td className="p-3 border">{tableData[house].landlord}</td>
-                <td className="p-3 border">{tableData[house].vacant}</td>
-                <td className="p-3 border">{tableData[house].occupied}</td>
-                <td className="p-3 border">{tableData[house].totalRooms}</td>
-                <td className="p-3 border action-buttons">
-                  <button className="bg-blue-500 text-white px-3 py-1 rounded mr-2">Edit</button>
-                  <button className="bg-red-500 text-white px-3 py-1 rounded">Delete</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+  {Object.keys(tableData).map((house, rowIndex) => (
+    <tr
+      key={rowIndex}
+      className={`border ${hover ? "hover:bg-gray-100 cursor-pointer" : ""}`}
+      onClick={(e) => {
+        // Ensure the onRowClick doesn't fire when clicking the button column
+        if (e.target.closest(".action-buttons")) return;
+        if (onRowClick) onRowClick(house);
+      }}
+    >
+      <td className="p-3 border">{house}</td>
+      {console.log(typeof(tableData))}
+      {typeof tableData[house] === 'object' ? (
+        // Iterate over the object keys/values
+        Object.entries(tableData[house]).map(([key, value], index) => (
+ 
+          <td key={index} className="p-3 border">
+             {value}
+          </td>
+        ))
+      ) : (
+        <td colSpan={columns.length} className="p-3 border text-center">
+          No data available
+        </td>
+      )}
+      <td className="p-3 border action-buttons">
+        <button className="bg-blue-500 text-white px-3 py-1 rounded mr-2">Edit</button>
+        <button className="bg-red-500 text-white px-3 py-1 rounded">Delete</button>
+      </td>
+    </tr>
+  ))}
+</tbody>
         </table>
       </div>
     </div>
