@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import LoginForm from './forms/login';
 import RegistrationForm from './forms/register';
 
-const HomePage = () => {
+const HomePage = ({ setIsLoggedIn }) => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
 
@@ -41,7 +41,7 @@ const HomePage = () => {
               &times; {/* Larger close icon */}
             </button>
             <h2 className="text-2xl font-bold mb-4">Login</h2>
-            <LoginForm onClose={() => setIsLoginOpen(false)} />
+            <LoginForm onClose={() => setIsLoginOpen(false)} setIsLoggedIn={setIsLoggedIn} />
           </div>
         </div>
       )}

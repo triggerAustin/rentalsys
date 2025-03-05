@@ -28,6 +28,8 @@ export default function roomsData(){
     { label: "Balance", key: "bal" },
     { label: "Expenses", key: "exp" },
     { label: "Paid", key: "paid" },
+    { label: "Paid2", key: "paid2" },
+    { label: "Paid3", key: "paid3" },
   ];
 
   const data = {
