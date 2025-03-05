@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Units = ({ setHouseName, setShowRooms, setTitle2 }) => {
+const House = ({ setHouseName, setShowRooms, setTitle2, setHouseId }) => {
   const [houses, setHouses] = useState([]);
   const columnsPerRow = 6;
 
@@ -11,11 +11,13 @@ const Units = ({ setHouseName, setShowRooms, setTitle2 }) => {
       .catch((error) => console.error("Error fetching houses:", error));
   }, []);
 
-  function DisplayUnits(hseName) {
+  function DisplayUnits(hseName, houseId) {
     let title2 = hseName + "> ";
     setHouseName(hseName);
     setShowRooms(true);
     setTitle2(title2);
+    setHouseId(houseId)
+    console.log("house id from housejs:", houseId)
   }
 
   return (
@@ -25,7 +27,7 @@ const Units = ({ setHouseName, setShowRooms, setTitle2 }) => {
           {houses
             .reduce((rows, house, index) => {
               if (index % columnsPerRow === 0) rows.push([]);
-              rows[rows.length - 1].push(house.house_name);
+              rows[rows.length - 1].push(house);
               return rows;
             }, [])
             .map((row, rowIndex) => (
@@ -33,10 +35,13 @@ const Units = ({ setHouseName, setShowRooms, setTitle2 }) => {
                 {row.map((house, colIndex) => (
                   <td
                     key={colIndex}
+                    data-house-id={house.house_id} // Store house ID
                     className="hover:cursor-pointer hover:bg-gray-300 p-3 text-center border flex-1"
-                    onClick={() => DisplayUnits(house)}
+                    onClick={() =>
+                      DisplayUnits(house.house_name, house.house_id)
+                    }
                   >
-                    {house}
+                    {house.house_name}
                   </td>
                 ))}
                 {Array(columnsPerRow - row.length)
@@ -52,4 +57,4 @@ const Units = ({ setHouseName, setShowRooms, setTitle2 }) => {
   );
 };
 
-export default Units;
+export default House;

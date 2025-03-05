@@ -13,11 +13,12 @@ export class HousesService {
     @InjectRepository(House)
     private houseRepo: Repository<House>,
     private landlordsService: LandlordsService,
+
   ) {}
 
+
   getHouses() {
-    const houses = this.houseRepo.find();
-    return houses;
+    return this.houseRepo.find()
   }
 
   async findHouse(house_id: string): Promise<House | null> {
