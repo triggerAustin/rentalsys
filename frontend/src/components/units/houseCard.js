@@ -13,7 +13,7 @@ const HouseCard = ({ houseDetails }) => {
     image,
     lr_number,
   } = houseDetails;
-
+console.log(house_name, address, landlordId, landlordTel)
   const fields = [
     { label: "House Name", value: house_name },
     { label: "Address", value: address },

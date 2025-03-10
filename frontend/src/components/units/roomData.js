@@ -7,7 +7,7 @@ import ReusableTable from "./table";
 import RoomCard from "./roomCard";
 
 
-export default function roomsData(){
+export default function UnitsData(){
   const [toggleDisplay, setToggleDisplay] = useState(true);
   const [selectedYear, setSelectedYear] = useState("2023");
   const [selectedHouse, setSelectedHouse] = useState("House A");

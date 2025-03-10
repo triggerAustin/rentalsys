@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import ReusableTable from './table';
 import HouseCard from "./houseCard";
 
-export default function Rooms(props){  
-  //props.HseName
+export default function Units(props){  
+  const [houseData, setHouseData] = useState([]);
+  
+
+    useEffect(() => {
+      fetch(`http://localhost:3001/houses/${props.hse_id}`)
+        .then((response) => response.json())
+        .then((data) => setHouseData(data))
+        .catch((error) => console.error("Error fetching HOuse Data:", error));
+    }, []);
 
   const handleEdit = (house) => {
     console.log("Edit house:", house);
@@ -16,11 +24,19 @@ export default function Rooms(props){
   };
 
   const columns = [
-    { label: "house", key: "house" },
-    { label: "landlord", key: "landlord" },
-    { label: "vaccant", key: "vaccant" },
-    { label: "occupied", key: "occupied" },
-    { label: "totalRooms", key: "totalRooms" },
+    { label: "Unit name", key: "unitName" },
+    { label: "Jan", key: "landlord" },
+    { label: "Feb", key: "vaccant" },
+    { label: "Mar", key: "occupied" },
+    { label: "Apr", key: "occupied" },
+    { label: "May", key: "occupied" },
+    { label: "Jun", key: "occupied" },
+    { label: "Jul", key: "occupied" },
+    { label: "Aug", key: "occupied" },
+    { label: "Sept", key: "occupied" },
+    { label: "Oct", key: "occupied" },
+    { label: "Nov", key: "occupied" },
+    { label: "Dec", key: "occupied" },
   ];
 
 
@@ -28,14 +44,14 @@ export default function Rooms(props){
  const tableData = {
   2023: {
     "House A": {
-      landlord: "John Doe",
-      vacant: 2,
-      occupied: 8,
-      totalRooms: 10,
+      landlord: 10000,
+      vacant: 1000,
+      occupied: 8000,
+      totalRooms: 10000,
     
     },
     "House B": {
-      landlord: "Jane Smith",
+      landlord: "3",
       vacant: 3,
       occupied: 5,
       totalRooms: 8,
@@ -66,13 +82,14 @@ export default function Rooms(props){
     props.setShowRoomsData(true)
     props.setRoomNumber(hse)
   }
+  console.log(houseData.house_name)
   const houseDetails = {
-    houseName: "Springfield House",
+    house_name: houseData.house_name,
     address: "123 Main St, Springfield",
     landlordTel: "0797466307",
     paymentRate: 1200,
     landlordId: "1232423432",
-    lrNumber: "923402-"
+    lr_number: houseData.lr_number
   };
 
   const handleHouseDetailsEdit = () => {
