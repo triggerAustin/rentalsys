@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const ReusableTable = ({ 
   columns, 
   data, 
+  moniteryData, 
   selectedYear, 
   onRowClick, 
   hover = true 
@@ -25,6 +26,7 @@ const ReusableTable = ({
 
   // Ensure data exists for the selected year & house
   const tableData = data?.[currentYear] || {};
+  const financialData = moniteryData?.[currentYear] || {}; // Ensure the financial data is for the selected year
 
   // Year selection handler
   const handleYearChange = (event) => {
@@ -54,49 +56,69 @@ const ReusableTable = ({
           {/* Table Header */}
           <thead className="sticky top-0">
             <tr className="bg-gray-200">
+              <th className="p-3 border text-left font-semibold">House</th>
               {columns.map((col, index) => (
                 <th key={index} className="p-3 border text-left font-semibold">
                   {col.label}
                 </th>
               ))}
-              <th className="p-3 border">Actions</th> {/* Column for Edit/Delete buttons */}
+              {/* If financial data exists, add headers for exp, bal, and paid */}
+              {moniteryData && (
+                <>
+                  <th className="p-3 border text-left font-semibold">Expenses</th>
+                  <th className="p-3 border text-left font-semibold">Balance</th>
+                  <th className="p-3 border text-left font-semibold">Paid</th>
+                </>
+              )}
+              <th className="p-3 border text-left font-semibold">Actions</th>
             </tr>
           </thead>
 
           {/* Table Body */}
           <tbody>
-  {Object.keys(tableData).map((house, rowIndex) => (
-    <tr
-      key={rowIndex}
-      className={`border ${hover ? "hover:bg-gray-100 cursor-pointer" : ""}`}
-      onClick={(e) => {
-        // Ensure the onRowClick doesn't fire when clicking the button column
-        if (e.target.closest(".action-buttons")) return;
-        if (onRowClick) onRowClick(house);
-      }}
-    >
-      <td className="p-3 border">{house}</td>
-      {console.log(typeof(tableData))}
-      {typeof tableData[house] === 'object' ? (
-        // Iterate over the object keys/values
-        Object.entries(tableData[house]).map(([key, value], index) => (
- 
-          <td key={index} className="p-3 border">
-             {value}
-          </td>
-        ))
-      ) : (
-        <td colSpan={columns.length} className="p-3 border text-center">
-          No data available
-        </td>
-      )}
-      <td className="p-3 border action-buttons">
-        <button className="bg-blue-500 text-white px-3 py-1 rounded mr-2">Edit</button>
-        <button className="bg-red-500 text-white px-3 py-1 rounded">Delete</button>
-      </td>
-    </tr>
-  ))}
-</tbody>
+            {Object.keys(tableData).map((house, rowIndex) => (
+              <tr
+                key={rowIndex}
+                className={`border ${hover ? "hover:bg-gray-100 cursor-pointer" : ""}`}
+                onClick={(e) => {
+                  if (e.target.closest(".action-buttons")) return;
+                  if (onRowClick) onRowClick(house);
+                }}
+              >
+                <td className="p-3 border">{house}</td>
+                {/* Render house details */}
+                {typeof tableData[house] === "object" ? (
+                  Object.values(tableData[house]).map((value, index) => (
+                    <td key={index} className="p-3 border">{value}</td>
+                  ))
+                ) : (
+                  <td colSpan={columns.length} className="p-3 border text-center">
+                    No data available
+                  </td>
+                )}
+                {/* Append financial data if available */}
+                {moniteryData && financialData[house] ? (
+                  <>
+                    <td className="p-3 border">{financialData[house].exp}</td>
+                    <td className="p-3 border">{financialData[house].bal}</td>
+                    <td className="p-3 border">{financialData[house].paid}</td>
+                  </>
+                ) : (
+                  moniteryData && (
+                    <>
+                      <td className="p-3 border">-</td>
+                      <td className="p-3 border">-</td>
+                      <td className="p-3 border">-</td>
+                    </>
+                  )
+                )}
+                <td className="p-3 border action-buttons">
+                  <button className="bg-blue-500 text-white px-3 py-1 rounded mr-2">Edit</button>
+                  <button className="bg-red-500 text-white px-3 py-1 rounded">Delete</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>
